@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, FlatList, StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
+import { Button, FlatList, StyleSheet, Text, View, Image, ImageBackground, Picker } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 
 
