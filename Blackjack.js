@@ -25,10 +25,11 @@ const Blackjack = ({ navigation }) => {
                     style={styles.card}
                 />
             </View>
-            <View style={{ flex: 1, justifyContent: 'left', alignItems: 'left' }}>
+            <View style={{flex: 1, justifyContent: 'left', alignItems: 'left'}}>
                 <Picker
                     selectedValue={dealerCard}
-                    style={{ height: 50, width: 200 }}
+                    style={styles.pickerr}
+                    itemStyle={styles.pickerrr}
                     onValueChange={handleDealer}
                 >
                     <Picker.Item label="King of Spades" value="KS" />
@@ -39,7 +40,9 @@ const Blackjack = ({ navigation }) => {
             </View>
             <Text style={styles.text}>Your Hand:</Text>
             
-
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Button title="Go to Other Screen" onPress={() => navigation.navigate('Strategy')} />
+            </View>
             
         </View>
         
@@ -69,6 +72,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
+    pickerr: {
+        height: 50,
+        width: 200,
+    },
+    pickerrr:{
+        fontSize: 14,
+        color: 'white'
+    }
+
   });
 
 export default Blackjack;

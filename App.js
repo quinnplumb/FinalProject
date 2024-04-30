@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Blackjack from './Blackjack';
+import Strategy from './Strategy';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -11,7 +12,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Blackjack'>
         <Stack.Screen name='Blackjack' component={Blackjack} />
-        {/* <Stack.Screen name='Strategy' component={Strategy} />  */}
+        <Stack.Screen name='Strategy' component={Strategy} />
       </Stack.Navigator>
     </NavigationContainer>
     
