@@ -1,12 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import ListOfMovies from './ListOfMovies';
+import MovieDetails from './MovieDetails';
+import Blackjack from './Blackjack';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Blackjack'>
+        <Stack.Screen name='Blackjack' component={Blackjack} />
+        {/* <Stack.Screen name='Strategy' component={Strategy} />  */}
+      </Stack.Navigator>
+    </NavigationContainer>
+    
   );
 }
 
