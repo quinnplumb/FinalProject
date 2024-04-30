@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import { Button, FlatList, StyleSheet, Text, View, Image, ImageBackground, Picker } from 'react-native';
+import { Button, FlatList, StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import { TouchableOpacity } from 'react-native';
 
 
 const Blackjack = ({ navigation }) => {
-    const dealerCard = 'back';
+    const [dealerCard, setDealerCard] = useState('back');
+
+    const handleDealer = (cardValue) => {
+        setDealerCard(cardValue);
+    };
     
     return (
         
@@ -12,13 +17,25 @@ const Blackjack = ({ navigation }) => {
             <Text style={styles.text}>Dealer's Hand:</Text>
             <View style={styles.cardContainer}>
                 <Image 
-                    source={{ uri: `https://deckofcardsapi.com/static/img/${dealerCard}.png` }} 
+                    source={{ uri: `https://deckofcardsapi.com/static/img/back.png` }} 
                     style={styles.card}
                 />
                 <Image 
                     source={{ uri: `https://deckofcardsapi.com/static/img/${dealerCard}.png` }} 
                     style={styles.card}
                 />
+            </View>
+            <View style={{ flex: 1, justifyContent: 'left', alignItems: 'left' }}>
+                <Picker
+                    selectedValue={dealerCard}
+                    style={{ height: 50, width: 200 }}
+                    onValueChange={handleDealer}
+                >
+                    <Picker.Item label="King of Spades" value="KS" />
+                    <Picker.Item label="King of Hearts" value="KH" />
+                    <Picker.Item label="King of Clubs" value="KC" />
+                    <Picker.Item label="King of Diamonds" value="KD" />
+                </Picker>
             </View>
             <Text style={styles.text}>Your Hand:</Text>
             
@@ -38,7 +55,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     text: {
-        textAlign: 'center',
+        textAlign: 'left',
         fontSize: 18,
         padding: 10,
         color: 'white'
