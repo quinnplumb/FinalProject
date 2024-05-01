@@ -1,10 +1,27 @@
 import React, { useState } from 'react';
-import { Button, FlatList, StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
+import { Button, FlatList, StyleSheet, Text, View, Image, FlatListComponent } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import { TouchableOpacity } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 
 const Blackjack = ({ navigation }) => {
+    const cardValues = [
+        { "title": "Ace of Spades", "value": "AS", "tot": 11 },
+        { "title": "Ace of Hearts", "value": "AH", "tot": 11 },
+        { "title": "Ace of Clubs", "value": "AC", "tot": 11 },
+        { "title": "Ace of Diamonds", "value": "AD", "tot": 11 },
+    ];
+
+    const dealerHand = [];
+    const playerHand = [];
+    
+    const handleClick = () => {
+        const deal = dealerCard.toString();
+        const play1 = player1.toString();
+        const play2 = player2.toString();
+        navigation.navigate('Strategy', { deal, play1, play2});
+    };
+    
     const [dealerCard, setDealerCard] = useState('back');
     const [player1, setPlayer1] = useState('back');
     const [player2, setPlayer2] = useState('back');
@@ -110,7 +127,7 @@ const Blackjack = ({ navigation }) => {
             <View style={{position: 'absolute', bottom: 375, flexDirection: 'row'}}>
             <Text style={styles.text}>Your Hand:                  </Text>
             <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 20 }}>
-            <Button title="View Basic Strategy" onPress={() => navigation.navigate('Strategy')} />
+            <Button title="View Basic Strategy" onPress={handleClick} />
             </View>
             </View>
             <View style={styles.cardContainer2}>
