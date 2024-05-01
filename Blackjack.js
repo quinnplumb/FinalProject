@@ -5,16 +5,7 @@ import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const Blackjack = ({ navigation }) => {
-    const cardValues = [
-        { "title": "Ace of Spades", "value": "AS", "tot": 11 },
-        { "title": "Ace of Hearts", "value": "AH", "tot": 11 },
-        { "title": "Ace of Clubs", "value": "AC", "tot": 11 },
-        { "title": "Ace of Diamonds", "value": "AD", "tot": 11 },
-    ];
 
-    const dealerHand = [];
-    const playerHand = [];
-    
     const handleClick = () => {
         const deal = dealerCard.toString();
         const play1 = player1.toString();

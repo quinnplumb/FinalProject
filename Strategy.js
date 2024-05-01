@@ -8,7 +8,7 @@ const Strategy = ({ navigation, route }) => {
 	const p1 = play1;
 	const p2 = play2;
 	const currentTotal = p1 + p2;
-	//const currentTotal = player1 + player2;
+	
 	const [handType, setHandType] = useState('hard'); 
 	const [move, setMove] = useState('hit');
 	const [total, setTotal] = useState(0);
@@ -89,6 +89,44 @@ const Strategy = ({ navigation, route }) => {
 		border: {
 		  borderWidth: 1,
 		  borderColor: "gray",
+		},
+		container2: {
+			flex: 1,
+			backgroundColor: '#35654d',
+			alignItems: 'center',
+			justifyContent: 'center',
+		},
+		text: {
+			  textAlign: 'left',
+			  fontSize: 18,
+			  padding: 10,
+			  color: 'white'
+		},
+		card2: {
+			  width:100,
+			  height: 150,
+			  marginHorizontal: 5,
+		},
+		cardContainer: {
+			  height: 150,
+			  flexDirection: 'row',
+			  alignItems: 'center',
+		},
+		cardContainer2: {
+			  height: 150,
+			  flexDirection: 'row',
+			  alignItems: 'center',
+			  position: 'absolute',
+			  bottom: 220
+		},
+		pickerr: {
+			  height: 50,
+			  width: 200
+		},
+		pickerrr:{
+			  fontSize: 14,
+			  color: 'white',
+			  fontWeight: 'bold'
 		}
 	  });  
 	
