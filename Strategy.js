@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, Text, Image, TouchableOpacity, Button, View, Fetch, UseEffect } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 
+
 const Strategy = ({ navigation, route }) => {
 	const {deal, play1, play2} = route.params;
 	const dealer = deal;
@@ -9,18 +10,33 @@ const Strategy = ({ navigation, route }) => {
 	const p2 = play2;
 	const currentTotal = p1 + p2;
 	
+	
+	const response = [ 
+		{ key: 'actionAsKey', value: '' },
+		{ key: 'action', value: 'yes' },
+		{ key: 'playerInput', value: '' },
+		{ key: 'dealersUpcard', value: '' } 
+	];
+	
+	const [list, setList] = useState(response);
 	const [handType, setHandType] = useState('hard'); 
 	const [move, setMove] = useState('hit');
 	const [total, setTotal] = useState(0);
-
+	const [dealVal, setDealer] = useState(0);
+	const [res, setRes] = useState('');
+	
 	useEffect(() => {
-	if(p1[0] === 'A'){
-		if(p2[0] === '0' || p2[0] === 'J' || p2[0] === 'Q' || p2[0] === 'K'){
-			setMove('Stand');
+		let dtotal = 0;
+		if(dealer[0] === 'A'){
+			dtotal = (dtotal + 11);
+		}else if(dealer[0] === '0' || dealer[0] === 'J' || dealer[0] === 'Q' || dealer[0] === 'K'){
+			dtotal = (dtotal + 10);
+		}else{
+			const vall = parseInt(dealer);
+			dtotal = (dtotal + vall);
 		}
-		setHandType('soft');
-	}
-	}, [play1, play2]);
+		setDealer(dtotal);
+	}, [deal]);
 
 	useEffect(() => {
 		let total = 0;
@@ -45,32 +61,16 @@ const Strategy = ({ navigation, route }) => {
 
 	  return (
 		<View>
-			<Text>Dealer showing: {deal}</Text>
+			<Text>Dealer showing: {dealVal}</Text>
 			<View>
 			<Image source={{ uri: `https://deckofcardsapi.com/static/img/${deal}.png` }} style={styles.card}/>
 			</View>
 			<Text>Player total: {total}</Text>
-			<Text>Move: {p1[0]} {move}</Text>
 		</View>
+		
 	  );
 	}
 
-// 	const data = null;
-
-// const xhr = new XMLHttpRequest();
-// xhr.withCredentials = true;
-
-// xhr.addEventListener('readystatechange', function () {
-// 	if (this.readyState === this.DONE) {
-// 		console.log(this.responseText);
-// 	}
-// });
-
-// xhr.open('GET', 'https://blackjack-basic-strategy.p.rapidapi.com/hard/17/11');
-// xhr.setRequestHeader('X-RapidAPI-Key', 'e339b9a640msh268ce8ad2d9ce0ep1d67cbjsnd774f55fecc0');
-// xhr.setRequestHeader('X-RapidAPI-Host', 'blackjack-basic-strategy.p.rapidapi.com');
-
-// xhr.send(data);
 
 	const styles = StyleSheet.create({
 		container: {
