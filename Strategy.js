@@ -215,7 +215,7 @@ const Strategy = ({ navigation, route }) => {
 			<Text style = {styles.text}>Basic Strategy says to:</Text>
 			<Text style = {styles.text2}>{move}</Text>
 			<View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 20, bottom: -25 }}>
-				<Button title="View Basic Strategy" onPress={handleClick} />
+				<Button title="Select Next Delt Card" onPress={handleClick} />
             </View>
 			
 			{/* <Text style = {styles.text}>redeal: {news}</Text> */}
