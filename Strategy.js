@@ -161,15 +161,20 @@ const Strategy = ({ navigation, route }) => {
 		};
 
 	  return (
-		<View>
-			<Text>Dealer showing: {dealVal}</Text>
+		<View style = {styles.container2}>
+			<Text style = {styles.title}>Basic Strategy:</Text>
 			<View>
 			<Image source={{ uri: `https://deckofcardsapi.com/static/img/${deal}.png` }} style={styles.card}/>
 			</View>
-			<Text>Player total: {total}</Text>
-			<Text>Move: {move}</Text>
+			<Text style = {styles.text}>Dealer showing: {dealVal}</Text>
+			<View style= {styles.cardContainer}>
+			<Image source={{ uri: `https://deckofcardsapi.com/static/img/${p1}.png` }} style={styles.card}/>
+			<Image source={{ uri: `https://deckofcardsapi.com/static/img/${p2}.png` }} style={styles.card}/>
+			</View>
+			<Text style = {styles.text}>Player total: {total}</Text>
+			<Text style = {styles.text}>Move: {move}</Text>
 			<Button title="View Basic Strategy" onPress={handleClick} />
-			<Text>redeal: {redeal}</Text>
+			<Text style = {styles.text}>redeal: {redeal}</Text>
 		</View>
 		
 		
@@ -232,6 +237,15 @@ const Strategy = ({ navigation, route }) => {
 			  fontSize: 14,
 			  color: 'white',
 			  fontWeight: 'bold'
+		},
+		title: {
+			textAlign: 'left',
+			  fontSize: 24,
+			  padding: 20,
+			  color: 'white',
+			  fontWeight: 'bold',
+			  paddingTop: 0,
+			  paddingBottom: 30
 		}
 	  });  
 	
