@@ -18,6 +18,7 @@ const Strategy = ({ navigation, route }) => {
 	const [move, setMove] = useState('hit');
 	const [total, setTotal] = useState(0);
 	const [dealVal, setDealer] = useState(0);
+	const [cardThree, setCardThree] = useState('');
 
 
 	useEffect(() => {
@@ -172,26 +173,46 @@ const Strategy = ({ navigation, route }) => {
 		const handleClick2 = () => {
 			navigation.navigate('Blackjack');
 		};
+		
+		// const card3 = (news) => {
+		// 	setCardThree(news);
+		// }
 
+		function card3() {
+			setCardThree(news);
+		}
+		
 		useEffect(() => {
 			
-		}, [total]);
+		}, [news]);
 
 	  return (
 		<View style = {styles.container2}>
-			<Button title="Reset" onPress={handleClick2} />
+			<View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 20, bottom: 35 }}>
+				<Button title="Reset" onPress={handleClick2} />
+            </View>
 			<Text style = {styles.title}>Basic Strategy:</Text>
-			<View>
-			<Image source={{ uri: `https://deckofcardsapi.com/static/img/${deal}.png` }} style={styles.card}/>
+			<View style= {styles.cardContainer}>
+				<Image source={{ uri: `https://deckofcardsapi.com/static/img/back.png` }} style={styles.card}/>
+				<Image source={{ uri: `https://deckofcardsapi.com/static/img/${deal}.png` }} style={styles.card}/>
 			</View>
 			<Text style = {styles.text}>Dealer showing: {dealVal}</Text>
 			<View style= {styles.cardContainer}>
-			<Image source={{ uri: `https://deckofcardsapi.com/static/img/${p1}.png` }} style={styles.card}/>
-			<Image source={{ uri: `https://deckofcardsapi.com/static/img/${p2}.png` }} style={styles.card}/>
-			<Image source={{ uri: `https://deckofcardsapi.com/static/img/${news}.png` }} style={styles.card}/>
+				{news !== '' ? (
+						<View style= {styles.cardContainer}>
+							<Image source={{ uri: `https://deckofcardsapi.com/static/img/${p1}.png` }} style={styles.card}/>
+							<Image source={{ uri: `https://deckofcardsapi.com/static/img/${p2}.png` }} style={styles.card}/>
+							<Image source={{ uri: `https://deckofcardsapi.com/static/img/${news}.png` }} style={styles.card}/>
+						</View>
+					) : (
+						<View style= {styles.cardContainer}>
+							<Image source={{ uri: `https://deckofcardsapi.com/static/img/${p1}.png` }} style={styles.card}/>
+							<Image source={{ uri: `https://deckofcardsapi.com/static/img/${p2}.png` }} style={styles.card}/>
+						</View>
+					)}
 			</View>
 			<Text style = {styles.text}>Player total: {total}</Text>
-			<Text style = {styles.text}>Move:</Text>
+			<Text style = {styles.text}>Basic Strategy says to:</Text>
 			<Text style = {styles.text2}>{move}</Text>
 			<View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 20, bottom: -25 }}>
 				<Button title="View Basic Strategy" onPress={handleClick} />
@@ -209,8 +230,14 @@ const Strategy = ({ navigation, route }) => {
 		container: {
 		 paddingTop: 50
 		},
+		card4: {
+			width: 80,
+			height: 120,
+			marginHorizontal: 5,
+			
+		  },
 		card: {
-			width:100,
+			width: 100,
 			height: 150,
 			marginHorizontal: 5,
 			
