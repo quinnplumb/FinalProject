@@ -28,7 +28,7 @@ const SecondDeal = ({ navigation, route }) => {
                     style={styles.card}
                 />
             </View>
-                <View style={{flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', position: 'absolute', bottom: 550, zIndex: 1}}>
+                <View style={{flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', position: 'absolute', bottom: 400, zIndex: 1}}>
                 <Picker
                     selectedValue={reDeal}
                     style={styles.pickerr}
@@ -104,9 +104,8 @@ const SecondDeal = ({ navigation, route }) => {
             </View>
             
             <View style={{position: 'absolute', bottom: 375, flexDirection: 'row'}}>
-            <Text style={styles.text}>Your Hand:                  </Text>
-            <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 20 }}>
-            <Button title="View Basic Strategy" onPress={handleClick} />
+            <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 20, bottom: -300 }}>
+                <Button title="Confirm Card" onPress={handleClick} />
             </View>
             </View>
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -132,12 +131,12 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     card: {
-        width:100,
-        height: 150,
+        width: 150,
+        height: 225,
         marginHorizontal: 5,
       },
     cardContainer: {
-        height: 150,
+        height: 300,
         flexDirection: 'row',
         alignItems: 'center',
     },
