@@ -10,12 +10,13 @@ const Blackjack = ({ navigation }) => {
         const deal = dealerCard.toString();
         const play1 = player1.toString();
         const play2 = player2.toString();
-        navigation.navigate('Strategy', { deal, play1, play2});
+        navigation.navigate('Strategy', { deal, play1, play2, newCards});
     };
     
     const [dealerCard, setDealerCard] = useState('back');
     const [player1, setPlayer1] = useState('back');
     const [player2, setPlayer2] = useState('back');
+    const [newCards, setNewCards] = useState('');
 
     const handleDealer = (cardValue) => {
         setDealerCard(cardValue);

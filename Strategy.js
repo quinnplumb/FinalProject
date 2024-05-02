@@ -1,42 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, Text, Image, TouchableOpacity, Button, View, Fetch, UseEffect } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
-
+import { useNavigation } from '@react-navigation/native';
 
 const Strategy = ({ navigation, route }) => {
-	const {deal, play1, play2} = route.params;
+	const {deal, play1, play2, newCards} = route.params;
+	const {redeal} = route.params;
 	const dealer = deal;
 	const p1 = play1;
 	const p2 = play2;
+	const news = newCards;
+	const newCard = redeal;
 	const currentTotal = p1 + p2;
 	
 	
-	const response = [ 
-		{ key: 'actionAsKey', value: '' },
-		{ key: 'action', value: 'yes' },
-		{ key: 'playerInput', value: '' },
-		{ key: 'dealersUpcard', value: '' } 
-	];
-	
-	const [list, setList] = useState(response);
 	const [handType, setHandType] = useState('hard'); 
 	const [move, setMove] = useState('hit');
 	const [total, setTotal] = useState(0);
 	const [dealVal, setDealer] = useState(0);
-	const [res, setRes] = useState('');
-	
-	useEffect(() => {
-		let dtotal = 0;
-		if(dealer[0] === 'A'){
-			dtotal = (dtotal + 11);
-		}else if(dealer[0] === '0' || dealer[0] === 'J' || dealer[0] === 'Q' || dealer[0] === 'K'){
-			dtotal = (dtotal + 10);
-		}else{
-			const vall = parseInt(dealer);
-			dtotal = (dtotal + vall);
-		}
-		setDealer(dtotal);
-	}, [deal]);
+
+
+	// useEffect(() => {
+		
+
+
+	// }, [newCards]);
 
 	useEffect(() => {
 		let total = 0;
@@ -59,6 +47,119 @@ const Strategy = ({ navigation, route }) => {
 		setTotal(total);
 		}, [play1, play2]);
 
+		
+		useEffect(() => {
+			let dtotal = 0;
+			if(dealer[0] === 'A'){
+				dtotal = (dtotal + 11);
+			}else if(dealer[0] === '0' || dealer[0] === 'J' || dealer[0] === 'Q' || dealer[0] === 'K'){
+				dtotal = (dtotal + 10);
+			}else{
+				const vall = parseInt(dealer);
+				dtotal = (dtotal + vall);
+			}
+			setDealer(dtotal);
+		}, [deal]);
+
+		useEffect(() => {
+			if(handType === 'hard') {
+				if(total < 9) {
+					setMove('Hit');
+				}
+				if(total === 9) {
+					if( dealVal !== 3 && dealVal !== 4 && dealVal !== 5 && dealVal !== 6) {
+						setMove('Hit');
+					}
+					else {
+						setMove('Double');
+					}
+			 }
+				if(total === 10) {
+					if(dealVal === 10 || dealVal === 11) {
+						setMove('Hit');
+					}
+					else{
+						setMove('Double');
+					}
+				}
+				if(total === 11) {
+					setMove('Double');
+				}
+				if(total === 12) {
+					if(dealVal === 4 || dealVal === 5 || dealVal === 6) {
+						setMove('Stay');
+					}
+					else{
+						setMove('Hit');
+					}
+				}
+				if(total === 13 || total === 14 || total === 15 || total === 16) {
+					if(dealVal === 2|| dealVal === 3 || dealVal === 4 || dealVal === 5 || dealVal === 6) {
+						setMove('Stay');
+					}
+					else{
+						setMove('Hit');
+					}
+				}
+				if(total >= 17 && total !== 22) {
+					setMove('Stay');
+				}
+				if(total === 22) {
+					if(dealVal === 4 || dealVal === 5 || dealVal === 6) {
+						setMove('Stay');
+					}
+					else{
+						setMove('Hit');
+					}
+				}
+			 }
+			 else {
+				if(total === 13 || total === 14) {
+					if(dealVal !== 5 && dealVal !== 6) {
+						setMove('Hit');
+					}
+					else{
+						setMove('Double');
+					}
+				}
+				if(total === 15 || total === 16) {
+					if(dealVal !== 4 && dealVal !== 5 && dealVal !== 6) {
+						setMove('Hit');
+					}
+					else{
+						setMove('Double');
+					}
+				}
+				if(total === 17) {
+					if(dealVal !== 3 && dealVal !== 4 && dealVal !== 5 && dealVal !== 6) {
+						setMove('Hit');
+					}
+					else{
+						setMove('Double');
+					}
+				}
+				if(total === 18) {
+					if(dealVal <= 8) {
+						setMove('Stay');
+					}
+					else {
+						setMove('Hit');
+					}
+				}
+				else{
+					setMove('Stay');
+				}
+			 
+			 
+			 }
+			 
+		}, [total]);
+		
+
+		const handleClick = () => {
+			navigation.navigate('SecondDeal', { deal, play1, play2, newCards});
+		};
+
 	  return (
 		<View>
 			<Text>Dealer showing: {dealVal}</Text>
@@ -66,7 +167,11 @@ const Strategy = ({ navigation, route }) => {
 			<Image source={{ uri: `https://deckofcardsapi.com/static/img/${deal}.png` }} style={styles.card}/>
 			</View>
 			<Text>Player total: {total}</Text>
+			<Text>Move: {move}</Text>
+			<Button title="View Basic Strategy" onPress={handleClick} />
+			<Text>redeal: {redeal}</Text>
 		</View>
+		
 		
 	  );
 	}

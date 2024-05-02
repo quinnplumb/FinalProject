@@ -4,6 +4,7 @@ import Blackjack from './Blackjack';
 import Strategy from './Strategy';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SecondDeal from './SecondDeal';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,6 +14,7 @@ export default function App() {
       <Stack.Navigator initialRouteName='Blackjack'>
         <Stack.Screen name='Blackjack' component={Blackjack} />
         <Stack.Screen name='Strategy' component={Strategy} />
+        <Stack.Screen name='SecondDeal' component={SecondDeal} />
       </Stack.Navigator>
     </NavigationContainer>
     
