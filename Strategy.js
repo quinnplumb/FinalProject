@@ -48,6 +48,9 @@ const Strategy = ({ navigation, route }) => {
 		}
 		if(p2[0] === 'A'){
 			total = (total + 11);
+			if(total > 21){
+				total = (total - 10);
+			}
 		}else if(p2[0] === '0' || p2[0] === 'J' || p2[0] === 'Q' || p2[0] === 'K'){
 			total = (total + 10);
 		}else{
