@@ -7,16 +7,17 @@ import { useNavigation } from '@react-navigation/native';
 const Blackjack = ({ navigation }) => {
 
     const handleClick = () => {
-        const deal = dealerCard.toString();
-        const play1 = player1.toString();
-        const play2 = player2.toString();
-        navigation.navigate('Strategy', { deal, play1, play2, newCards});
+        let deal = dealerCard.toString();
+        let play1 = player1.toString();
+        let play2 = player2.toString();
+        let newCards1 = newCards.toString();
+        navigation.navigate('Strategy', { deal, play1, play2, newCards1});
     };
     
-    const [dealerCard, setDealerCard] = useState('back');
-    const [player1, setPlayer1] = useState('back');
-    const [player2, setPlayer2] = useState('back');
-    const [newCards, setNewCards] = useState('');
+    let [dealerCard, setDealerCard] = useState('back');
+    let [player1, setPlayer1] = useState('back');
+    let [player2, setPlayer2] = useState('back');
+    let [newCards, setNewCards] = useState('');
 
     const handleDealer = (cardValue) => {
         setDealerCard(cardValue);

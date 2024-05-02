@@ -4,12 +4,12 @@ import {Picker} from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 
 const Strategy = ({ navigation, route }) => {
-	const {deal, play1, play2, newCards} = route.params;
+	let {deal, play1, play2, newCards1} = route.params;
 	const {redeal} = route.params;
 	const dealer = deal;
 	const p1 = play1;
 	const p2 = play2;
-	const news = newCards;
+	const news = newCards1;
 	const newCard = redeal;
 	const currentTotal = p1 + p2;
 	
@@ -20,11 +20,20 @@ const Strategy = ({ navigation, route }) => {
 	const [dealVal, setDealer] = useState(0);
 
 
-	// useEffect(() => {
-		
-
-
-	// }, [newCards]);
+	useEffect(() => {
+		if(news !== ''){
+			let temp = 0;
+			if(news[0] === 'A'){
+				temp = (temp + 11);
+			}else if(news[0] === '0' || news[0] === 'J' || news[0] === 'Q' || news[0] === 'K'){
+				temp = (temp + 10);
+			}else{
+				const vall = parseInt(newCards1);
+				temp = (temp + vall);
+			}
+			setTotal(total + temp);
+		}
+	}, [newCards1]);
 
 	useEffect(() => {
 		let total = 0;
@@ -157,11 +166,20 @@ const Strategy = ({ navigation, route }) => {
 		
 
 		const handleClick = () => {
-			navigation.navigate('SecondDeal', { deal, play1, play2, newCards});
+			navigation.navigate('SecondDeal', { deal, play1, play2, newCards1 });
 		};
+
+		const handleClick2 = () => {
+			navigation.navigate('Blackjack');
+		};
+
+		useEffect(() => {
+			
+		}, [total]);
 
 	  return (
 		<View style = {styles.container2}>
+			<Button title="Reset" onPress={handleClick2} />
 			<Text style = {styles.title}>Basic Strategy:</Text>
 			<View>
 			<Image source={{ uri: `https://deckofcardsapi.com/static/img/${deal}.png` }} style={styles.card}/>
@@ -170,11 +188,16 @@ const Strategy = ({ navigation, route }) => {
 			<View style= {styles.cardContainer}>
 			<Image source={{ uri: `https://deckofcardsapi.com/static/img/${p1}.png` }} style={styles.card}/>
 			<Image source={{ uri: `https://deckofcardsapi.com/static/img/${p2}.png` }} style={styles.card}/>
+			<Image source={{ uri: `https://deckofcardsapi.com/static/img/${news}.png` }} style={styles.card}/>
 			</View>
 			<Text style = {styles.text}>Player total: {total}</Text>
-			<Text style = {styles.text}>Move: {move}</Text>
-			<Button title="View Basic Strategy" onPress={handleClick} />
-			<Text style = {styles.text}>redeal: {redeal}</Text>
+			<Text style = {styles.text}>Move:</Text>
+			<Text style = {styles.text2}>{move}</Text>
+			<View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 20, bottom: -25 }}>
+				<Button title="View Basic Strategy" onPress={handleClick} />
+            </View>
+			
+			{/* <Text style = {styles.text}>redeal: {news}</Text> */}
 		</View>
 		
 		
@@ -190,6 +213,7 @@ const Strategy = ({ navigation, route }) => {
 			width:100,
 			height: 150,
 			marginHorizontal: 5,
+			
 		  },
 		item: {
 		  padding: 10,
@@ -211,6 +235,13 @@ const Strategy = ({ navigation, route }) => {
 			  fontSize: 18,
 			  padding: 10,
 			  color: 'white'
+		},
+		text2: {
+			fontSize: 24,
+			padding: 10,
+			color: 'green',
+			fontWeight: 'bold',
+			backgroundColor: 'white'
 		},
 		card2: {
 			  width:100,

@@ -5,15 +5,16 @@ import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const SecondDeal = ({ navigation, route }) => {
-    const {deal, play1, play2, newCards} = route.params;
-    const card = newCards;
+    let {deal, play1, play2, newCards1} = route.params;
+    
 
     const handleClick = () => {
-        const newCards = reDeal.toString();
-        navigation.navigate('Strategy', { deal, play1, play2, newCards });
+        newCards1 = reDeal.toString();
+        navigation.navigate('Strategy', { deal, play1, play2, newCards1 });
     };
     
     const [reDeal, setReDeal] = useState('back');
+    const [find, setFind] = useState('');
 
     const handleReDeal = (cardValue) => {
         setReDeal(cardValue);
